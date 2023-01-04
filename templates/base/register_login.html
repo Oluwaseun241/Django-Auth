@@ -1,0 +1,59 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Slide Navbar</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'styles/styles.css' %}"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    {% if page == 'login' %}
+    <div class="main">
+      <div class="login">
+        <form method="POST">
+          {% csrf_token %}
+          <label for="chk" aria-hidden="true">Login</label>
+          <input
+            type="text"
+            name="Username"
+            placeholder="Username"
+            required=""
+          />
+          <input
+            type="password"
+            name="pswd"
+            placeholder="Password"
+            required=""
+          />
+          <button>Login</button>
+        </form>
+		<div class="auth__action">
+			<p>Haven't signed up yet?</p>
+			<a href="{% url 'register' %}" class="btn btn--link">Register</a>
+		  </div>
+      </div>
+
+      {% else %}
+      <div class="signup">
+        <form method="POST">
+          {% csrf_token %} {% for field in form %}
+          <label for="chk" aria-hidden="true">{{field.label}}</label>
+          {{field}} {% endfor %}
+          <button>Sign up</button>
+        </form>
+		<div class="auth__action">
+			<p>Already signed up yet?</p>
+			<a href="{% url 'login' %}" class="btn btn--link">Login</a>
+		  </div>
+      </div>
+    </div>
+	{% endif %}
+  </body>
+</html>
