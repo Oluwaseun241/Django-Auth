@@ -1,0 +1,12 @@
+{% load static %}
+<html>
+  <head>
+    <title>My Dashboard</title>
+    <link rel="stylesheet" href="{% static 'styles/dash.css' %}" type="text/css" />
+  </head>
+  <body>
+    <h1>My Dashboard</h1>
+    <p>Welcome, {{ user.username }}</p>
+    <a href="{% url 'logout' %}">Log out</a>
+  </body>
+</html>

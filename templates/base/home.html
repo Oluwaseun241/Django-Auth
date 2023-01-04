@@ -1,12 +1,39 @@
+{% load static %}
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'styles/home.css' %}"
+    />
     <title>Document</title>
-</head>
-<body>
-    <h1>Welcome</h1>
-    <a href="{% url 'logout' %}">Logout</a>
-</body>
+  </head>
+  <body>
+    <!-- <h1>Welcome</h1>
+    <a href="{% url 'logout' %}">Logout</a> -->
+    <html>
+      <head>
+        <title>Welcome</title>
+      </head>
+      <body>
+        <h1>Welcome to My Site</h1>
+        <p>Thank you for visiting. Please log in to continue.</p>
+        <form method="post" action="{% url 'login' %}">
+          {% csrf_token %}
+          <label for="username">Username:</label>
+          <input type="text" name="username" required /><br />
+          <label for="password">Password:</label>
+          <input type="password" name="password" required /><br />
+          <input type="submit" value="Log in" />
+        </form>
+        <div class="auth__action">
+			<p>Haven't register?</p>
+			<a href="{% url 'register' %}" class="btn btn--link">Register</a>
+		  </div>
+      </body>
+    </html>
+  </body>
 </html>

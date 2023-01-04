@@ -6,52 +6,74 @@ from django.contrib.auth import authenticate, login, logout
 # Create your views here.
 
 
-def login(request):
-    page = 'login'
+def home(request):
     if request.user.is_authenticated:
-        return redirect('home')
+        return redirect('dashboard')
+    else:
+        return render(request, 'base/home.html')
 
+def register(request):
     if request.method == 'POST':
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-
-        try:
-            user = User.objects.get(username=username)
-        except:
-            messages.error(request, 'User does not exist')
-
-        user = authenticate(request, username=username, password=password)
-
-        if user is not None:
+        # Process the form data
+        username = request.POST['username']
+        email = request.POST['email']
+        password1 = request.POST['password1']
+        password2 = request.POST['password2']
+        if password1 == password2:
+            # Create a new user
+            user = User.objects.create_user(
+                username=username,
+                email=email,
+                password=password1
+            )
+            # Login the user and redirect to the dashboard
             login(request, user)
-            return redirect('home')
+            return redirect('dashboard')
         else:
-            messages.error(request, 'Username OR password does not exist')
+            # Return an error message
+            return render(request, 'base/register.html', {
+                'error_message': 'Passwords do not match'
+            })
+    else:
+        return render(request, 'base/register.html')
 
-    context = {'page': page}
-    return render(request, 'base/home.html', context)
+def dashboard(request):
+    return render(request, 'base/dashboard.html')
 
+def login_view(request):
+    if request.method == 'POST':
+        # Process the login form
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            # Login the user and redirect to the dashboard
+            login(request, user)
+            return redirect('dashboard')
+        else:
+            # Return an error message
+            return render(request, 'login.html', {
+                'error_message': 'Invalid login credentials'
+            })
+    else:
+        return render(request, 'base/home.html')
 
 def logoutUser(request):
     logout(request)
     return redirect('home')
 
-def register(request):
-    form = RegisterForm()
-    if request.method == 'POST':
-        form = RegisterForm(request.POST)
-        if form.is_valid():
-            user = form.save(commit=False)
-            user.username = user.username.lower()
-            user.save()
-            login(request, user)
-            return redirect('home')
-        else:
-            messages.error(request, 'An error occurred during registration')
+# def register(request):
+#     form = RegisterForm()
+#     if request.method == 'POST':
+#         form = RegisterForm(request.POST)
+#         if form.is_valid():
+#             user = form.save(commit=False)
+#             user.username = user.username.lower()
+#             user.save()
+#             login(request, user)
+#             return redirect('home')
+#         else:
+#             messages.error(request, 'An error occurred during registration')
 
-    return render(request, 'base/register_login.html', {'form': form})
+#     return render(request, 'base/register_login.html', {'form': form})
 
-
-
-def home(request):
-    return render(request, 'base/home.html')
