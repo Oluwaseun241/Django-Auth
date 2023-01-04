@@ -12,8 +12,6 @@
     <title>Document</title>
   </head>
   <body>
-    <!-- <h1>Welcome</h1>
-    <a href="{% url 'logout' %}">Logout</a> -->
     <html>
       <head>
         <title>Welcome</title>
@@ -30,9 +28,11 @@
           <input type="submit" value="Log in" />
         </form>
         <div class="auth__action">
-			<p>Haven't register?</p>
-			<a href="{% url 'register' %}" class="btn btn--link">Register</a>
-		  </div>
+          <p>Haven't register?</p>
+          <a href="{% url 'register' %}">
+            <input type="submit" value="Register"/>
+        </a>
+        </div>
       </body>
     </html>
   </body>
