@@ -38,7 +38,10 @@ def register(request):
         return render(request, 'base/register.html')
 
 def dashboard(request):
-    return render(request, 'base/dashboard.html')
+    if request.user.is_authenticated:
+        return render(request, 'base/dashboard.html')
+    else:
+        return redirect('login')
 
 def login_view(request):
     if request.method == 'POST':
