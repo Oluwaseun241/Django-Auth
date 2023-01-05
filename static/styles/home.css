@@ -10,7 +10,7 @@ h1 {
 }
 
 p {
-    text-align: center;
+  text-align: center;
 }
 
 form {
@@ -54,6 +54,14 @@ input[type="submit"]:hover {
   background-color: #45a049;
 }
 
-/* .auth__action input {
-  
-} */
+.auth__action a {
+  display: block;
+  width: 100px;
+  margin: 0 auto;
+  background-color: #4caf50;
+  color: #fff;
+  text-align: center;
+  text-decoration: none;
+  padding: 14px;
+  border-radius: 5px;
+}

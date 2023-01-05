@@ -6,7 +6,7 @@
     <link
       rel="stylesheet"
       type="text/css"
-      href="{% static 'styles/styles.css' %}"
+      href="{% static 'styles/register.css' %}"
     />
   </head>
   <body>
@@ -23,13 +23,9 @@
 		<input type="submit" value="Register">
 	  </form>
 	  
-		<div class="auth__action">
-			<p>Already signed up yet?</p>
-			<a href="{% url 'login' %}">
-				<input type="submit" value="Log in" />
-			</a>
-		  </div>
-      </div>
-    </div>
+	<div class="auth__action">
+		<p>Already signed up yet?</p>
+		<a href="{% url 'login' %}">Login</a>
+	</div>
   </body>
 </html>
