@@ -12,6 +12,7 @@ def home(request):
     else:
         return render(request, 'base/home.html')
 
+
 def register(request):
     if request.method == 'POST':
         # Process the form data
@@ -37,11 +38,13 @@ def register(request):
     else:
         return render(request, 'base/register.html')
 
+
 def dashboard(request):
     if request.user.is_authenticated:
         return render(request, 'base/dashboard.html')
     else:
         return redirect('login')
+
 
 def login_view(request):
     if request.method == 'POST':
@@ -60,6 +63,7 @@ def login_view(request):
             })
     else:
         return render(request, 'base/home.html')
+
 
 def logoutUser(request):
     logout(request)
@@ -80,5 +84,22 @@ def logoutUser(request):
 
 #     return render(request, 'base/register_login.html', {'form': form})
 
+
 def password_reset(request):
-    return render(request, 'base/password_reset.html')
+    if request.method == 'POST':
+        # Process the form submission
+        email = request.POST['email']
+        try:
+            user = User.objects.get(email=email)
+            # Send the password reset email
+            auth_views.PasswordResetView.as_view()(
+                request, email_template_name='base/password_reset_confirm.html')
+            # Redirect to the password reset done page
+            return redirect('password_reset_done')
+        except User.DoesNotExist:
+            # Return an error message
+            return render(request, 'base/password_reset_form.html', {
+                'error_message': 'Email address not found'
+            })
+    else:
+        return render(request, 'base/password_reset_form.html')
