@@ -6,7 +6,7 @@
   </head>
   <body>
     <h1>My Dashboard</h1>
-    <p>Welcome, {{ user.username }}</p>
+    <p>Welcome {{ user.username }}</p>
     <a href="{% url 'logout' %}">Log out</a>
   </body>
 </html>
