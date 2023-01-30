@@ -59,7 +59,7 @@ def login_view(request):
             return redirect('dashboard')
         else:
             # Return an error message
-            return render(request, 'login.html', {
+            return render(request, 'base/home.html', {
                 'error_message': 'Invalid login credentials'
             })
     else:
@@ -104,3 +104,13 @@ def password_reset(request):
             })
     else:
         return render(request, 'base/password_reset_form.html')
+
+def password_reset_done(request):
+    return render(request, 'base/password_reset_done.html')
+
+def password_reset_complete(request):
+    return render(request, 'base/password_reset_complete.html')
+
+def password_reset_confirm(request, *args, **kwargs):
+    return render(request, 'base/password_reset_complete.html')
+
