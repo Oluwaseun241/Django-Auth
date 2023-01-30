@@ -108,8 +108,8 @@ def password_reset(request):
 def password_reset_done(request):
     return render(request, 'base/password_reset_done.html')
 
-def password_reset_complete(request):
-    return render(request, 'base/password_reset_complete.html')
+def password_reset_confirm(request, uidb64, token):
+    return render(request, 'base/password_reset_confirm.html')
 
-def password_reset_confirm(request, uidb64, token) :
-    return render(request, 'base/password_reset_form.html')
+def password_reset_complete(request):
+    return render (request, 'base/password_reset_complete.html')
