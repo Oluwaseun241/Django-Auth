@@ -65,3 +65,9 @@ input[type="submit"]:hover {
   padding: 14px;
   border-radius: 5px;
 }
+
+.error {
+  color: red;
+  text-align: center;
+  align-content: center;
+}
