@@ -1,6 +1,5 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
-# from .forms import RegisterForm
 from django.contrib import messages
 from django.contrib.auth import views as auth_views, authenticate, login, logout
 
@@ -70,21 +69,6 @@ def logoutUser(request):
     logout(request)
     return redirect('home')
 
-# def register(request):
-#     form = RegisterForm()
-#     if request.method == 'POST':
-#         form = RegisterForm(request.POST)
-#         if form.is_valid():
-#             user = form.save(commit=False)
-#             user.username = user.username.lower()
-#             user.save()
-#             login(request, user)
-#             return redirect('home')
-#         else:
-#             messages.error(request, 'An error occurred during registration')
-
-#     return render(request, 'base/register_login.html', {'form': form})
-
 
 def password_reset(request):
     if request.method == 'POST':
@@ -108,8 +92,8 @@ def password_reset(request):
 def password_reset_done(request):
     return render(request, 'base/password_reset_done.html')
 
-def password_reset_confirm(request, uidb64, token):
-    return render(request, 'base/password_reset_confirm.html')
+# def password_reset_confirm(request, uidb64, token):
+#     return render(request, 'base/password_reset_confirm.html')
 
-def password_reset_complete(request):
-    return render (request, 'base/password_reset_complete.html')
+# def password_reset_complete(request):
+#     return render (request, 'base/password_reset_complete.html')
